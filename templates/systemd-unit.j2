@@ -1,0 +1,18 @@
+[Unit]
+Description=RabbitMQ Exporter
+After=rabbitmq-server.service
+
+[Service]
+Type=forking
+User={{ rabbitmq_exporter_service_user|default('rabbitmq') }}
+{% if rabbitmq_exporter_service_group is defined %}Group={{ rabbitmq_exporter_service_group }}
+{% endif %}
+RuntimeDirectory=rabbitmq_exporter
+RuntimeDirectoryMode=0755
+EnvironmentFile=/etc/default/{{ rabbitmq_exporter_service_name }}
+PIDFile=/var/run/{{ rabbitmq_exporter_service_name }}/pid
+ExecStart=/sbin/start-stop-daemon -Sbmp /var/run/{{ rabbitmq_exporter_service_name }}/pid -x /usr/local/bin/rabbitmq_exporter
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

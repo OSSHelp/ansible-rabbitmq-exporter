@@ -1,0 +1,29 @@
+---
+- name: install binary
+  get_url:
+    url: "{{ rabbitmq_exporter_binary_url }}"
+    dest: "/usr/local/bin/"
+    checksum: "{{ rabbitmq_exporter_sum }}"
+    mode: 0755
+  notify: restart rabbitmq_exporter service
+
+- name: configuration
+  template:
+    src: default-config.j2
+    dest: "/etc/default/{{ rabbitmq_exporter_service_name }}"
+  notify: restart rabbitmq_exporter service
+
+- name: create systemd unit
+  template:
+    src: systemd-unit.j2
+    dest: "/etc/systemd/system/{{ rabbitmq_exporter_service_name }}.service"
+  notify:
+    - reload rabbitmq_exporter unit
+    - restart rabbitmq_exporter service
+
+- meta: flush_handlers
+
+- name: enable systemd unit
+  systemd:
+    name: "{{ rabbitmq_exporter_service_name }}"
+    enabled: true

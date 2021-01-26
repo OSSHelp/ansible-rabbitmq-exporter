@@ -1,0 +1,5 @@
+---
+rabbitmq_exporter_version: "0.29.0"
+rabbitmq_exporter_binary_url: "https://oss.help/builds/pub/rabbitmq_exporter/{{ rabbitmq_exporter_version }}/rabbitmq_exporter"
+rabbitmq_exporter_sum: "sha256:https://oss.help/builds/pub/rabbitmq_exporter/{{ rabbitmq_exporter_version }}/SHA256SUMS"
+rabbitmq_exporter_service_name: "rabbitmq_exporter"

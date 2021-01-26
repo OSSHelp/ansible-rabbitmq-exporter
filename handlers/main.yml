@@ -1,0 +1,9 @@
+---
+- name: reload rabbitmq_exporter unit
+  systemd:
+    daemon_reload: yes
+
+- name: restart rabbitmq_exporter service
+  systemd:
+    name: "{{ rabbitmq_exporter_service_name }}"
+    state: restarted

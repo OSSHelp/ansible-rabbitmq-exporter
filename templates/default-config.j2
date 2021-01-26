@@ -1,0 +1,9 @@
+##Environment variables for kbuddle rabbitmq exporter. More information -  https://github.com/kbudde/rabbitmq_exporter.
+
+RABBIT_URL="{{ rabbitmq_exporter_rabbit_url|default('http://localhost:15672') }}"
+RABBIT_USER="{{ rabbitmq_exporter_rabbit_user|default('guest') }}"
+RABBIT_PASSWORD="{{ rabbitmq_exporter_rabbit_password|default('guest') }}"
+PUBLISH_PORT="{{ rabbitmq_exporter_publish_port|default('9090') }}"
+OUTPUT_FORMAT="{{ rabbitmq_exporter_output_format|default('JSON') }}"
+LOG_LEVEL="{{ rabbitmq_exporter_log_level|default('info') }}"
+RABBIT_EXPORTERS="{{ rabbitmq_exporter_rabbit_exporters|default('exchange,node,overview,queue,connections') }}"
